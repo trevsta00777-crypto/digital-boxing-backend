@@ -85,3 +85,33 @@ server {
 - [ ] Stripe test Checkout completes; Payment row → `completed` via webhook
 - [ ] Backup script produces a `.sql.gz` + `.sha256`
 - [ ] Confirm `.env*` are gitignored and rotated if previously committed
+
+## Host-volume Postgres backups
+
+Compose mounts the host folder into the DB container:
+
+```yaml
+# db service
+volumes:
+  - ./backups:/backups
+```
+
+- **Host path:** `./backups/` (next to your compose file)
+- **Container path:** `/backups`
+
+Recommended daily backup (writes onto the host volume):
+
+```bash
+# from repo root
+./scripts/backup_via_compose.sh
+# or cron (02:00 UTC):
+# 0 2 * * * cd /path/to/digital-boxing-backend && ./scripts/backup_via_compose.sh >>/var/log/boxing-backup.log 2>&1
+```
+
+Restore from a host dump:
+
+```bash
+./scripts/restore_postgres.sh ./backups/boxing_YYYYMMDDThhmmssZ.sql.gz
+```
+
+Keep `BACKUP_DIR=/backups` in container env if you run `backup_postgres.sh` inside the db/api network. Still copy dumps off-box periodically if you can.

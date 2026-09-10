@@ -37,3 +37,9 @@ backups/
 # Stripe / certs
 *.pem
 .stripe/
+
+# Host-volume database dumps (keep directory via .gitkeep)
+backups/*.sql
+backups/*.sql.gz
+backups/*.sha256
+!backups/.gitkeep

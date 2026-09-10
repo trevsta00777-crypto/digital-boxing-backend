@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-# Restore a gzipped plain SQL dump created by backup_postgres.sh
+# Restore a gzipped plain SQL dump created by backup_postgres.sh / backup_via_compose.sh
+# Dumps on the host live in ./backups/ (Compose mounts that as /backups in the db container).
+#
 # Usage:
 #   ./scripts/restore_postgres.sh backups/boxing_20260101T000000Z.sql.gz
+#   ./scripts/restore_postgres.sh /backups/boxing_20260101T000000Z.sql.gz
 set -euo pipefail
 
 if [[ $# -lt 1 ]]; then
