@@ -18,6 +18,7 @@ services:
       - .env
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./backups:/backups
     ports:
       - "5432:5432"
 

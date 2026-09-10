@@ -1,0 +1,45 @@
+# Secrets & local env
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Local DBs / dumps
+*.db
+*.sqlite3
+backups/
+*.sql.gz
+*.dump
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Stripe / certs
+*.pem
+.stripe/
+
+# Host-volume database dumps (keep directory via .gitkeep)
+backups/*.sql
+backups/*.sql.gz
+backups/*.sha256
+!backups/.gitkeep
